@@ -159,7 +159,7 @@ void err_msg(char *arg0, char *arg1)
  *
  * Return: a pointer to the evaluated argument (either new or an altered clone)
  */
-char *check_for_vars(char *arg)
+char *var_check(char *arg)
 {
 	char *clone = NULL;
 	char *ptr = arg;
