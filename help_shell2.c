@@ -1,4 +1,5 @@
 #include "shell.h"
+char *var_check(char *arg);
 
 int status;
 
