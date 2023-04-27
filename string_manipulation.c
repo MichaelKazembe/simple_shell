@@ -1,243 +1,122 @@
 #include "shell.h"
 
-int status;
-
 /**
- * _setenv - sets and environmental variable
- * @name: name of the variable
- * @value: value to set the variable to
+ *  _strlen - returns length of a string
+ * @str: string to be evaluated
  *
- * Return: 0 on success
+ * Return: the length of the string
  */
-int _setenv(const char *name, const char *value)
+int _strlen(char *str)
 {
-	char **new_environ;
-	char *buffer;
-	char *buf_tmp;
-	char *element_ptr = get_arr_element(environ, (char *) name);
-	int len;
+	int i = 0;
 
-	if (value == NULL)
+	if (str == NULL)
+		return (0);
+
+	while (*str != '\0')
 	{
-		write(STDERR_FILENO, "setenv: no value given\n", 23);
-		status = 2;
-		return (SKP_FORK);
+		i++;
+		str++;
 	}
 
-	buffer = str_concat((char *)name, "=");
-	buf_tmp = str_concat(buffer, (char *)value);
-	free(buffer);
-	buffer = buf_tmp;
-
-	if (element_ptr == NULL)
-	{
-		len = list_length(environ, NULL);
-		new_environ = arr_cpy(environ, len + 1);
-		new_environ[len - 1] = buffer;
-		new_environ[len] = NULL;
-		free_arr(environ);
-		environ = new_environ;
-		return (SKP_FORK);
-	}
-
-	len = list_length(environ, (char *)name);
-	free(environ[len]);
-	environ[len] = buffer;
-
-	status = 0;
-
-	return (SKP_FORK);
+	return (i);
 }
 
 /**
- * _unsetenv - deletes an environmental variable
- * @name: name of variable
+ * _strdup - allocates a space in memory for a copy of a string
+ * @src: string a copy is made of
  *
- * Return: 0 if successful
+ * Return: a pointer to the copy, or NULL if failure
  */
-int _unsetenv(const char *name)
+char *_strdup(char *src)
 {
-	char **env_ptr;
-	int len = list_length(environ, (char *)name);
+	int len = _strlen(src);
+	char *dest = malloc(len + 1);
+	char *ptr;
 
-	if (len == -1)
+	if (dest == NULL)
+		exit(EXIT_FAILURE);
+
+	ptr = dest;
+
+	while (*src != '\0')
 	{
-		write(STDERR_FILENO, "unsetenv: variable not found\n", 29);
-		status = 2;
-		return (SKP_FORK);
-	}
-
-	env_ptr = environ + len;
-	free(*env_ptr);
-	while (*(env_ptr + 1) != NULL)
-	{
-		*env_ptr = *(env_ptr + 1);
-		env_ptr++;
-	}
-	*env_ptr = NULL;
-	status = 0;
-
-	return (SKP_FORK);
-}
-
-/**
- * change_dir - changes the current working directory
- * @name: name of directory to change to
- *
- * Return: 0 if successful
- */
-int change_dir(char *name)
-{
-	char *home;
-	char *pwd;
-	char path_buffer[PATH_MAX];
-	size_t buf_size = PATH_MAX;
-	int i;
-
-	getcwd(path_buffer, buf_size);
-
-	if (name == NULL || str_comp("~", name, PRFX) == TRUE
-	    || str_comp("$HOME", name, MARK) == TRUE)
-	{
-		if (name != NULL && *name == '~' && *(name + 1) != '\0'
-		    && *(name + 1) != '/')
-		{
-			status = 2;
-			err_msg("cd", name);
-			return (SKP_FORK);
-		}
-
-		home = get_arr_element(environ, "HOME");
-		if (home == NULL)
-		{
-			status = 2;
-			err_msg("cd", name);
-			return (SKP_FORK);
-		}
-
-		while (*home != '=')
-			home++;
-
-		home++;
-		i = chdir((const char *)home);
-		if (i != -1)
-			_setenv("PWD", (const char *)home);
-
-		if (name != NULL && str_comp("~/", name, PRFX) == TRUE)
-			name += 2;
-	}
-	if (str_comp("-", name, MARK) == TRUE)
-	{
-		pwd = get_arr_element(environ, "OLDPWD");
-		if (pwd == NULL)
-			return (2);
-
-		while (*pwd != '=')
-		{
-			pwd++;
-		}
-		pwd++;
-
-		i = chdir((const char *)pwd);
-		if (i != -1)
-		{
-			write(STDOUT_FILENO, pwd, _strlen(pwd));
-			write(STDOUT_FILENO, "\n", 1);
-			_setenv("PWD", (const char *)pwd);
-		}
-	}
-	if (name != NULL && str_comp("~", name, MARK) == FALSE
-	    && str_comp("$HOME", name, MARK) == FALSE && i != -1
-	    && *name != '\0' && str_comp("-", name, MARK) != TRUE)
-	{
-		i = chdir((const char *)name);
-		if (i != -1)
-			_setenv("PWD", (const char *)name);
-	}
-	if (i == -1)
-	{
-		status = 2;
-		err_msg("cd", name);
-		return (SKP_FORK);
-	}
-
-	status = 0;
-	_setenv("OLDPWD", (const char *)path_buffer);
-
-	return (SKP_FORK);
-}
-
-/**
- * alias_func - deals with command aliases
- * @args: arguments from command line
- * @to_free: indicated if aliases need to be freed (exiting shell);
- *
- * Return: TRUE if exiting, FALSE if the command is not "alias" or an alias,
- * SKP_FORK if success
- */
-int alias_func(char **args, int to_free)
-{
-	static alias head = {NULL, NULL, NULL};
-	char *char_ptr;
-	int no_error = TRUE;
-
-	if (to_free == TRUE)
-		return (free_alias(head.next));
-
-	if (str_comp("alias", *args, MARK) != TRUE)
-		return (if_alias(args, head.next));
-
-	args++;
-
-	if (*args == NULL)
-		return (alias_print(head.next));
-
-	while (*args != NULL)
-	{
-		char_ptr = *args;
-		while (*char_ptr != '\0' && *char_ptr != '=')
-			char_ptr++;
-
-		if (*char_ptr == '\0' || char_ptr == *args)
-		{
-			if (alias_value_print(*args, &head) == FALSE)
-				no_error = FALSE;
-		}
-		else
-		{
-			*char_ptr = '\0';
-			char_ptr++;
-			alias_value_set(*args, &head, char_ptr);
-			*(char_ptr - 1) = '=';
-		}
-		args++;
-	}
-
-	if (no_error == FALSE)
-		return (SKP_FORK);
-
-	status = 0;
-	return (SKP_FORK);
-}
-
-/**
- * print_env - prints the environment
- *
- * Return: TRUE
- */
-int print_env(void)
-{
-	char **ptr = environ;
-
-	while (*ptr != NULL)
-	{
-		write(STDOUT_FILENO, *ptr, _strlen(*ptr));
-		write(STDOUT_FILENO, "\n", 1);
+		*ptr = *src;
 		ptr++;
+		src++;
 	}
 
-	status = 0;
+	*ptr = '\0';
 
-	return (SKP_FORK);
+	return (dest);
 }
 
+/**
+ * str_concat - concatenates two strings
+ * @s1: first string
+ * @s2: second string
+ *
+ * Return: a pointer to the new string, or NULL if failure
+ */
+char *str_concat(char *s1, char *s2)
+{
+	int len = _strlen(s1) + _strlen(s2);
+	char *dest = malloc(len + 1);
+	char *ptr = dest;
+
+	if (s1 != NULL)
+	{
+		while (*s1 != '\0')
+		{
+			*ptr = *s1;
+			ptr++;
+			s1++;
+		}
+	}
+
+	if (s2 != NULL)
+	{
+		while (*s2 != '\0')
+		{
+			*ptr = *s2;
+			ptr++;
+			s2++;
+		}
+	}
+
+	*ptr = '\0';
+
+	return (dest);
+}
+
+/**
+ * str_comp - compare two string
+ * @s1: string to be compared
+ * @s2: string to be compared
+ * @pref_or_match: if string needs to be matched exactly or if just a prefix
+ * needs to be matched
+ *
+ * Return: difference between strings
+ */
+int str_comp(char *s1, char *s2, int pref_or_match)
+{
+	if (s1 == NULL || s2 == NULL)
+		return (FALSE);
+
+	while (*s1 != '\0' && *s2 != '\0')
+	{
+		if (*s1 != *s2)
+			return (FALSE);
+
+		s1++;
+		s2++;
+	}
+
+	if (pref_or_match == PREFIX)
+		return (TRUE);
+
+	if (*s1 == *s2)
+		return (TRUE);
+
+	return (FALSE);
+}
