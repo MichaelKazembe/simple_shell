@@ -8,7 +8,7 @@ char *SMshell;
 
 /**
  * input_sanitizer - sanitizes input from the command line
- * @old_buf: buffer to be sanitized
+ * @old_buf: buffer to be sanitized..
  * @old_size: size of old buffer
  *
  * Return: the new, sanitized buffer
