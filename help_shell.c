@@ -8,7 +8,7 @@ char *SMshell;
 
 /**
  * input_sanitizer - sanitizes input from the command line
- * @old_buf: buffer to be sanitized..
+ * @old_buf: buffer to be sanitized
  * @old_size: size of old buffer
  *
  * Return: the new, sanitized buffer
@@ -119,7 +119,7 @@ void err_msg(char *arg0, char *arg1)
 	write(STDERR_FILENO, err_str_num, _strlen(err_str_num));
 	free(err_str_num);
 
-	if (str_comp("cd", arg0, MATCH) == TRUE)
+	if (str_comp("cd", arg0, MARK) == TRUE)
 	{
 		status = 2;
 		write(STDERR_FILENO, ": cd: can't cd to", 17);
@@ -128,7 +128,7 @@ void err_msg(char *arg0, char *arg1)
 		return;
 	}
 
-	if (str_comp("exit", arg0, MATCH) == TRUE)
+	if (str_comp("exit", arg0, MARK) == TRUE)
 	{
 		write(STDERR_FILENO, ": exit: Illegal number: ", 24);
 		write(STDERR_FILENO, arg1, _strlen(arg1));
@@ -184,15 +184,15 @@ char *check_for_vars(char *arg)
 			if (*next == '$' && next > ptr + 1)
 				is_var = TRUE;
 			else if (*next == '#')
-				is_var = NEITHER;
+				is_var = NETHR;
 			else
 				is_var = FALSE;
 
 			*next = '\0';
 
-			if (str_comp("$?", ptr, MATCH) == TRUE)
+			if (str_comp("$?", ptr, MARK) == TRUE)
 				tmp = ito_str(status);
-			else if (str_comp("$0", ptr, MATCH) == TRUE)
+			else if (str_comp("$0", ptr, MARK) == TRUE)
 				tmp = _strdup(SMshell);
 			else if (get_arr_element(environ, ptr + 1) != NULL)
 				tmp = _strdup(get_arr_element
@@ -212,14 +212,14 @@ char *check_for_vars(char *arg)
 			}
 			if (is_var == TRUE)
 				*next = '$';
-			else if (is_var == NEITHER)
+			else if (is_var == NETHR)
 				*next = '#';
 			tmp = str_concat(ptr, next);
 			free(ptr);
 			ptr = tmp;
 			free(clone);
 			clone = ptr;
-			if (is_var == NEITHER)
+			if (is_var == NETHR)
 			{
 				while (*ptr != '#')
 					ptr++;

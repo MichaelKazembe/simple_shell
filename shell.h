@@ -14,9 +14,9 @@
 
 #define FALSE 0
 #define TRUE 1
-#define NEITHER 2
+#define NETHR 2
 #define MARK 3
-#define PREF 4
+#define PRFX 4
 #define EXT_SHELL 5
 #define SKP_FORK 6
 #define _EXECVE 7
@@ -30,6 +30,19 @@ extern int line_nm;
 
 extern char *SMshell;
 
+/**
+ * struct Alias - list of singly linked
+ * @name: alias names
+ * @value: command that alias calls
+ * @next: points to next node
+ */
+
+typedef struct Alias
+{
+	char *name;
+	char *value;
+	struct Alias *next;
+} alias;
 
 int cmd_manager(char **args);
 
@@ -95,18 +108,5 @@ char *ito_str(int n);
 
 int _atoi(char *s);
 
-/**
- * struct Alias - list of singly linked
- * @name: alias names
- * @value: command that alias calls
- * @next: points to next node..
- */
-
-typedef struct Alias
-{
-	char *name;
-	char *value;
-	struct Alias *next;
-} alias;
 
 #endif

@@ -3,7 +3,7 @@
 int status;
 
 /**
- * free_alias - frees all aliases..
+ * free_alias - frees all aliases
  * @alias_ptr: ptr to head of alias list
  *
  * Return: TRUE
@@ -50,7 +50,7 @@ int if_alias(char **args, alias *alias_ptr)
  * alias_print - prints all aliases in list
  * @alias_ptr: points to list of aliases
  *
- * Return: SKIP_FORK
+ * Return: SKP_FORK
  */
 int alias_print(alias *alias_ptr)
 {
@@ -63,7 +63,7 @@ int alias_print(alias *alias_ptr)
 		write(STDOUT_FILENO, "\'\n", 2);
 		alias_ptr = alias_ptr->next;
 	}
-	return (SKIP_FORK);
+	return (SKP_FORK);
 }
 
 /**

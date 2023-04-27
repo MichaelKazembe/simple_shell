@@ -6,7 +6,7 @@ char *SMshell;
 
 /**
  * cmd_manager - manages the process a command goes through to get executed
- * @args: command and arguments..
+ * @args: command and arguments
  *
  * Return: TRUE if success, FALSE if failure
  */
@@ -65,7 +65,7 @@ int cmd_manager(char **args)
  * builtins - checks if a command is a built in
  * @args: command and arguments
  *
- * Return: SKIP_FORK if built in, _EXECVE if not a built in, EXT_SHELL if
+ * Return: SKP_FORK if built in, _EXECVE if not a built in, EXT_SHELL if
  * exit shell, EXT_SHELL_CODE if exiting with a particular code
  */
 int builtins(char **args)
@@ -85,10 +85,10 @@ int builtins(char **args)
 		args_ptr++;
 	}
 	if (*args == NULL)
-		return (SKIP_FORK);
+		return (SKP_FORK);
 
 	i = alias_fun(args, FALSE);
-	if (i == _EXECVE || i == SKIP_FORK)
+	if (i == _EXECVE || i == SKP_FORK)
 		return (i);
 
 	if (str_comp("exit", *args, MARK) == TRUE && args[1] != NULL)
@@ -98,7 +98,7 @@ int builtins(char **args)
 		{
 			status = 2;
 			err_msg(args[0], args[1]);
-			return (SKIP_FORK);
+			return (SKP_FORK);
 		}
 	}
 	if (str_comp("exit", *args, MARK) == TRUE)
@@ -141,8 +141,8 @@ int andor(char **args, char operator, int last_compare)
 	if (last_compare == TRUE && operator == '&')
 	{
 		i = execute_cmd(args);
-		if (i == EXIT_SHELL)
-			return (EXIT_SHELL);
+		if (i == EXT_SHELL)
+			return (EXT_SHELL);
 		if (i == TRUE)
 			return (TRUE);
 
@@ -152,8 +152,8 @@ int andor(char **args, char operator, int last_compare)
 	if (last_compare == FALSE && operator == '|')
 	{
 		i = execute_cmd(args);
-		if (i == EXIT_SHELL)
-			return (EXIT_SHELL);
+		if (i == EXT_SHELL)
+			return (EXT_SHELL);
 		if (i == TRUE)
 			return (TRUE);
 
@@ -255,7 +255,7 @@ char *check_cmd(char **args)
  * execute_cmd - executes a command
  * @args: command and arguments
  *
- * Return: TRUE or EXIT_SHELL
+ * Return: TRUE or EXT_SHELL
  */
 int execute_cmd(char **args)
 {
@@ -380,7 +380,7 @@ int cmd_manager(char **args)
  * builtins - checks if a command is a built in
  * @args: command and arguments
  *
- * Return: SKIP_FORK if built in, _EXECVE if not a built in, EXT_SHELL if
+ * Return: SKP_FORK if built in, _EXECVE if not a built in, EXT_SHELL if
  * exit shell, EXT_SHELL_CODE if exiting with a particular code
  */
 int builtins(char **args)
@@ -400,10 +400,10 @@ int builtins(char **args)
 		args_ptr++;
 	}
 	if (*args == NULL)
-		return (SKIP_FORK);
+		return (SKP_FORK);
 
 	i = alias_fun(args, FALSE);
-	if (i == _EXECVE || i == SKIP_FORK)
+	if (i == _EXECVE || i == SKP_FORK)
 		return (i);
 
 	if (str_comp("exit", *args, MARK) == TRUE && args[1] != NULL)
@@ -413,7 +413,7 @@ int builtins(char **args)
 		{
 			status = 2;
 			err_msg(args[0], args[1]);
-			return (SKIP_FORK);
+			return (SKP_FORK);
 		}
 	}
 	if (str_comp("exit", *args, MARK) == TRUE)
@@ -456,8 +456,8 @@ int andor(char **args, char operator, int last_compare)
 	if (last_compare == TRUE && operator == '&')
 	{
 		i = execute_cmd(args);
-		if (i == EXIT_SHELL)
-			return (EXIT_SHELL);
+		if (i == EXT_SHELL)
+			return (EXT_SHELL);
 		if (i == TRUE)
 			return (TRUE);
 
@@ -467,8 +467,8 @@ int andor(char **args, char operator, int last_compare)
 	if (last_compare == FALSE && operator == '|')
 	{
 		i = execute_cmd(args);
-		if (i == EXIT_SHELL)
-			return (EXIT_SHELL);
+		if (i == EXT_SHELL)
+			return (EXT_SHELL);
 		if (i == TRUE)
 			return (TRUE);
 
@@ -570,7 +570,7 @@ char *check_cmd(char **args)
  * execute_cmd - executes a command
  * @args: command and arguments
  *
- * Return: TRUE or EXIT_SHELL
+ * Return: TRUE or EXT_SHELL
  */
 int execute_cmd(char **args)
 {

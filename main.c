@@ -8,7 +8,7 @@ char *shell_name = NULL;
 
 /**
  * main - executes commands from the terminal
- * @ac: number of inputs from main..
+ * @ac: number of inputs from main
  * @av: array of inputs from main
  *
  * Return: 0, or another number if desired
@@ -76,7 +76,7 @@ int main(__attribute__((unused))int ac, char **av)
 		if (is_separated == FALSE)
 			line_nm++;
 
-		if (i == EXIT_SHELL)
+		if (i == EXT_SHELL)
 			break;
 	}
 	free(buf);
