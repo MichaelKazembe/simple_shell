@@ -5,7 +5,7 @@ int status;
 /**
  * _setenv - sets and environmental variable
  * @name: name of the variable
- * @value: value to set the variable to
+ * @value: value to set the variable to...
  *
  * Return: 0 on success
  */
