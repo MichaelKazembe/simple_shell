@@ -8,7 +8,7 @@ char *shell_name = NULL;
 
 /**
  * main - executes commands from the terminal
- * @ac: number of inputs from main
+ * @ac: number of inputs from main..
  * @av: array of inputs from main
  *
  * Return: 0, or another number if desired
