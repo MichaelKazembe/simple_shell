@@ -3,7 +3,7 @@
 int status;
 
 /**
- * free_alias - frees all aliases
+ * free_alias - frees all aliases..
  * @alias_ptr: ptr to head of alias list
  *
  * Return: TRUE
