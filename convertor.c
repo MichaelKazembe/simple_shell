@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * ito_str - converts an int into a string
+ * ito_str - converts an int into a string.
  * @n: int to be converted
  *
  * Return: the converted number
