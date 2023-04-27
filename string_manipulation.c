@@ -112,7 +112,7 @@ int str_comp(char *s1, char *s2, int pref_or_match)
 		s2++;
 	}
 
-	if (pref_or_match == PREFIX)
+	if (pref_or_match == PRFX)
 		return (TRUE);
 
 	if (*s1 == *s2)
