@@ -39,7 +39,7 @@ int main(__attribute__((unused))int ac, char **av)
 		if (is_separated == FALSE)
 		{
 			if (isatty(STDIN_FILENO) == 1)
-				write(STDOUT_FILENO, "my_shell$ ", 10);
+				write(STDOUT_FILENO, "SMshell$ ", 10);
 
 			bytes_read = getline(&buf, &buf_size, stdin);
 
