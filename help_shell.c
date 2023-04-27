@@ -1,10 +1,5 @@
 #include "shell.h"
 
-int status;
-
-int line_nm;
-
-char *SMshell;
 
 /**
  * input_sanitizer - sanitizes input from the command line
