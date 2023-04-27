@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * get_arr_element - gets an element of an array
+ * get_arr_element - gets an element of an array..
  * @array: array to be searched
  * @element_name: name of element to be found
  *
