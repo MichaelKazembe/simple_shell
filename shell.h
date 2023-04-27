@@ -99,7 +99,7 @@ int _atoi(char *s);
  * struct Alias - list of singly linked
  * @name: alias names
  * @value: command that alias calls
- * @next: points to next node
+ * @next: points to next node..
  */
 
 typedef struct Alias
