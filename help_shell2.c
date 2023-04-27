@@ -6,7 +6,7 @@ char *SMshell;
 
 /**
  * cmd_manager - manages the process a command goes through to get executed
- * @args: command and arguments
+ * @args: command and arguments..
  *
  * Return: TRUE if success, FALSE if failure
  */
