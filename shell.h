@@ -75,7 +75,7 @@ char *str_concat(char *s1, char *s2);
 
 int str_comp(char *s1, char *s2, int pref_or_match);
 
-char *get_arr_element(char **array, char *element_name);
+char *get_arr_element(char **arr, char *el_name);
 
 char **make_arr(char *str, char delim, char **if_sep);
 
