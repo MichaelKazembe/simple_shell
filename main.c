@@ -9,13 +9,19 @@
  * @return 0 upon successful completion of the program, or another integer if desired.
  */
 int main(__attribute__((unused))int ac, char **av)
-{
+{	
 	int status = 0;
 	int line_nm = 1;
 	char *shell_name = NULL;
+<<<<<<< HEAD
 
 	int read_btyes;
 	int sep = FALSE;
+=======
+	
+	int bytes_read;
+	int is_separated = FALSE;
+>>>>>>> parent of a71c1e4...  removed global variables in files
 	int i;
 	size_t bufferfer_s = 1;
 	char *buffer = NULL;
