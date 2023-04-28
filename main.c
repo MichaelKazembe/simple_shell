@@ -7,11 +7,12 @@ int line_nm = 1;
 char *shell_name = NULL;
 
 /**
- * main - executes commands from the terminal
- * @ac: number of inputs from main
- * @av: array of inputs from main
+ * main - The entry point of the program that executes commands from the terminal.
  *
- * Return: 0, or another number if desired
+ * @param ac The number of arguments passed to the program.
+ * @param av The array of arguments passed to the program.
+ *
+ * @return 0 upon successful completion of the program, or another integer if desired.
  */
 int main(__attribute__((unused))int ac, char **av)
 {
