@@ -2,11 +2,14 @@
 
 
 /**
- * _setenv - sets and environmental variable
- * @name: name of the variable..
+ * _setenv - sets an environment variable
+ *
+ * @name: name of the variable
  * @value: value to set the variable to
  *
- * Return: 0 on success
+ * Sets the value of the environment variable named `name` to the given `value`.
+ *
+ * Returns: 0 on success, -1 on failure
  */
 int _setenv(const char *name, const char *value)
 {
@@ -49,10 +52,13 @@ int _setenv(const char *name, const char *value)
 }
 
 /**
- * _unsetenv - deletes an environmental variable
- * @name: name of variable
+ * _unsetenv - deletes an environment variable
  *
- * Return: 0 if successful
+ * @name: name of the variable to delete
+ *
+ * Deletes the environment variable with the given `name`.
+ *
+ * Returns: 0 on success, -1 on failure
  */
 int _unsetenv(const char *name)
 {
@@ -81,9 +87,12 @@ int _unsetenv(const char *name)
 
 /**
  * change_directory - changes the current working directory
- * @name: name of directory to change to
  *
- * Return: 0 if successful
+ * @name: name of the directory to change to
+ *
+ * Changes the current working directory to the one specified by `name`.
+ *
+ * Returns: 0 on success, -1 on failure
  */
 int change_directory(char *name)
 {
@@ -167,12 +176,13 @@ int change_directory(char *name)
 }
 
 /**
- * alias_fun - deals with command aliases
- * @args: arguments from command line
- * @to_free: indicated if aliases need to be freed (exiting shell);
+ * alias_fun - handles command aliases
  *
- * Return: TRUE if exiting, FALSE if the command is not "alias" or an alias,
- * SKP_FORK if success
+ * @args: arguments from the command line
+ * @to_free: flag indicating whether aliases need to be freed (when exiting shell)
+ *
+ * Handles command aliases. Returns TRUE if the shell is exiting, FALSE if the
+ * command is not an alias, and SKP_FORK if successful.
  */
 int alias_fun(char **args, int to_free)
 {
@@ -222,7 +232,9 @@ int alias_fun(char **args, int to_free)
 /**
  * print_environ - prints the environment
  *
- * Return: TRUE
+ * Prints the environment to stdout.
+ *
+ * Returns: TRUE
  */
 int print_environ(void)
 {
