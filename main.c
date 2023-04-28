@@ -1,11 +1,5 @@
 #include "shell.h"
 
-int status = 0;
-
-int line_nm = 1;
-
-char *shell_name = NULL;
-
 /**
  * main - The entry point of the program that executes commands from the terminal.
  *
@@ -15,7 +9,11 @@ char *shell_name = NULL;
  * @return 0 upon successful completion of the program, or another integer if desired.
  */
 int main(__attribute__((unused))int ac, char **av)
-{
+{	
+	int status = 0;
+	int line_nm = 1;
+	char *shell_name = NULL;
+	
 	int bytes_read;
 	int is_separated = FALSE;
 	int i;
