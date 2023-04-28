@@ -6,10 +6,11 @@ int status;
 char *SMshell;
 
 /**
- * cmd_manager - manages the process a command goes through to get executed
- * @args: command and arguments
+ * cmd_manager - Manages the process a command goes through to get executed.
  *
- * Return: TRUE if success, FALSE if failure
+ * @param args The command and its arguments.
+ *
+ * @return TRUE if the command is successfully executed, FALSE if there is a failure.
  */
 int cmd_manager(char **args)
 {
@@ -63,11 +64,12 @@ int cmd_manager(char **args)
 }
 
 /**
- * builtins - checks if a command is a built in
- * @args: command and arguments
+ * builtins - Checks if a command is a built-in shell command.
  *
- * Return: SKP_FORK if built in, _EXECVE if not a built in, EXT_SHELL if
- * exit shell, EXT_SHELL_CODE if exiting with a particular code
+ * @param args The command and its arguments.
+ *
+ * @return SKP_FORK if the command is a built-in, _EXECVE if it is not a built-in,
+ * EXT_SHELL if the shell is being exited, and EXT_SHELL_CODE if the shell is being exited with a specific code.
  */
 int builtins(char **args)
 {
@@ -118,12 +120,13 @@ int builtins(char **args)
 }
 
 /**
- * andor - deals with command line logical operators
- * @args: command and arguments
- * @operator: first char of logical operator
- * @last_compare: if last command in logic evaluated to true or false
+ * andor - Deals with command line logical operators.
  *
- * Return: if this command evaluates to true or false
+ * @param args The command and its arguments.
+ * @param operator The first character of the logical operator.
+ * @param last_compare Whether the last command evaluated to true or false.
+ *
+ * @return Whether this command evaluates to true or false.
  */
 int andor(char **args, char operator, int last_compare)
 {
@@ -168,10 +171,11 @@ int andor(char **args, char operator, int last_compare)
 }
 
 /**
- * check_cmd - checks if a non-built-in exists
- * @args: argument and commands
+ * check_cmd - Determines whether a given command is valid and can be executed.
  *
- * Return: TRUE if valid command, FALSE if not
+ * @param args The command and its arguments.
+ *
+ * @return TRUE if the command is valid and can be executed, FALSE if it cannot be executed.
  */
 char *check_cmd(char **args)
 {
@@ -253,10 +257,11 @@ char *check_cmd(char **args)
 }
 
 /**
- * execute_cmd - executes a command
- * @args: command and arguments
+ * execute_cmd - Executes a given command with its arguments.
  *
- * Return: TRUE or EXT_SHELL
+ * @param args The command and its arguments.
+ *
+ * @return TRUE if the command is successfully executed, or EXT_SHELL if the shell is being exited.
  */
 int execute_cmd(char **args)
 {
