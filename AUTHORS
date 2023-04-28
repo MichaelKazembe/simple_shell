@@ -1,0 +1,7 @@
+This is a simple shell project created by Samuel Chigozie [nzekwesammy@gmail.com] and Michael Kazembe [Michaelkazembe@gmail.com] 
+as part of the curriculum for ALX SIMPLE_SHELL TASK.
+
+It is a command-line interface that allows users to interact with the operating system by running commands. 
+The simple shell supports executing external commands, redirecting input and output, pipelining commands,
+running commands in the background, environment variable expansion, signal handling, and builtin commands 
+such as cd, echo, exit, and more.
