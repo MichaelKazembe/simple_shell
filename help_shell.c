@@ -2,11 +2,12 @@
 
 
 /**
- * input_sanitizer - sanitizes input from the command line
- * @old_buf: buffer to be sanitized
- * @old_size: size of old buffer
+ * sanitize_input - Cleanses input from the command line to prevent unwanted behavior.
  *
- * Return: the new, sanitized buffer
+ * @param old_buf Pointer to the buffer to be cleansed.
+ * @param old_size Size of the original buffer.
+ *
+ * @return A new buffer containing the sanitized input.
  */
 char *input_sanitizer(char *old_buf, size_t *old_size)
 {
@@ -70,10 +71,11 @@ char *input_sanitizer(char *old_buf, size_t *old_size)
 }
 
 /**
- * input_err_checking - helper function for sanitizer, check for unexpected char
- * @ptr: pointer to area that needs to be checked
+ * input_err_checking - A helper function for the input sanitizer that checks for unexpected characters.
  *
- * Return: TRUE if no error, FALSE if error
+ * @param ptr Pointer to the area that needs to be checked.
+ *
+ * @return TRUE if there are no errors, FALSE if there are errors.
  */
 int input_err_checking(char *ptr)
 {
@@ -101,9 +103,10 @@ int input_err_checking(char *ptr)
 }
 
 /**
- * err_msg - prints error messages and sets status
- * @arg0: command that is causing error
- * @arg1: first argument to command
+ * err_msg -  Prints an error message and sets the status accordingly.
+ *
+ * @param arg0 The command that is causing the error.
+ * @param arg1 The first argument to the command.
  */
 void err_msg(char *arg0, char *arg1)
 {
@@ -148,11 +151,11 @@ void err_msg(char *arg0, char *arg1)
 }
 
 /**
- * check_for_vars - checks an argument to see if it is a variable and if so,
- * replaces it with it's value
- * @arg: argument to be checked
+ * check_for_vars - Checks if the argument is a variable and if so, replaces it with its value.
  *
- * Return: a pointer to the evaluated argument (either new or an altered clone)
+ * @param arg The argument to be checked.
+ *
+ * @return A pointer to the evaluated argument (either new or an altered clone).
  */
 char *var_check(char *arg)
 {
