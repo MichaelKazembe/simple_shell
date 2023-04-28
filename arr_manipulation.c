@@ -1,23 +1,23 @@
 #include "shell.h"
 
 /**
- * locate_array_element - retrieves the specified element from an array
+ * locate_arr_element - retrieves the specified element from an arr
  *
- * @array: pointer to the array to search
- * @element_name: pointer to the name of the element to locate
+ * @arr: pointer to the arr to search
+ * @el_name: pointer to the name of the element to locate
  *
- * This function searches the given array for an element with the specified name.
+ * This function searches the given arr for an element with the specified name.
  *
- * Return: pointer to the element if found, or NULL if it is not found in the array
+ * Return: pointer to the element if found, or NULL if it is not found in the arr
  */
-char *get_arr_element(char **array, char *element_name)
+char *get_arr_element(char **arr, char *el_name)
 {
-	while (*array != NULL)
+	while (*arr != NULL)
 	{
-		if (str_comp(*array, element_name, PRFX) == TRUE)
-			return (*array);
+		if (str_comp(*arr, el_name, PRFX) == TRUE)
+			return (*arr);
 
-		array++;
+		arr++;
 	}
 
 	return (NULL);
@@ -28,15 +28,15 @@ char *get_arr_element(char **array, char *element_name)
  *
  * @str: pointer to the buffer string to parse
  * @delim: the delimiter character that separates list entries
- * @if_sep: pointer to update with location after delimiter, or NULL
+ * @ifsep: pointer to update with location after delimiter, or NULL
  *
  * Returns pointer to resulting list, or NULL if allocation fails
  */
-char **make_arr(char *str, char delim, char **if_sep)
+char **make_arr(char *str, char delim, char **ifsep)
 {
 	char *str_ptr = str;
 	unsigned int i = 2;
-	char **array = NULL;
+	char **arr = NULL;
 
 	while (*str_ptr != '\0')
 	{
@@ -48,11 +48,11 @@ char **make_arr(char *str, char delim, char **if_sep)
 		str_ptr++;
 	}
 
-	array = malloc(i * sizeof(char **));
-	if (array == NULL)
+	arr = malloc(i * sizeof(char **));
+	if (arr == NULL)
 		exit(EXIT_FAILURE);
 
-	array[0] = str;
+	arr[0] = str;
 	str_ptr = str;
 	i = 1;
 
@@ -64,37 +64,37 @@ char **make_arr(char *str, char delim, char **if_sep)
 			str_ptr++;
 			if (*str_ptr == ';')
 			{
-				array[i] = NULL;
+				arr[i] = NULL;
 				if (*(str_ptr + 1) != '\0' && *(str_ptr + 2) != '\0')
-					*if_sep = str_ptr + 2;
+					*ifsep = str_ptr + 2;
 				break;
 			}
 			if (*str_ptr != '\0')
 			{
-				array[i] = str_ptr;
+				arr[i] = str_ptr;
 				i++;
 			}
 		}
 		str_ptr++;
 	}
-	array[i] = NULL;
+	arr[i] = NULL;
 
-	return (array);
+	return (arr);
 }
 
 /**
- * list_length - returns length or index of a list entry
+ * list_length - returns length or index of a list intro
  *
  * @list: pointer to the list to evaluate
- * @entry: pointer to the entry to index
+ * @intro: pointer to the intro to index
  *
- * Returns length or index of the entry if successful, or -1 if failed
+ * Returns length or index of the intro if successful, or -1 if failed
  */
-int list_length(char **list, char *entry)
+int list_length(char **list, char *intro)
 {
 	int i = 0;
 
-	if (entry == NULL)
+	if (intro == NULL)
 	{
 		while (*list != NULL)
 		{
@@ -108,7 +108,7 @@ int list_length(char **list, char *entry)
 	{
 		while (*list != NULL)
 		{
-			if (str_comp(*list, entry, PRFX) == TRUE)
+			if (str_comp(*list, intro, PRFX) == TRUE)
 				return (i);
 
 			i++;
@@ -120,38 +120,38 @@ int list_length(char **list, char *entry)
 }
 
 /**
- * arr_cpy - creates a copy of an array
+ * arr_cpy - creates a copy of an arr
  *
- * @old_array: pointer to array to copy
- * @new_size: size of new array
+ * @old_arr: pointer to arr to copy
+ * @new_s: size of new arr
  *
- * Returns pointer to new array, or NULL if allocation fails
+ * Returns pointer to new arr, or NULL if allocation fails
  */
-char **arr_cpy(char **old_array, int new_size)
+char **arr_cpy(char **old_arr, int new_s)
 {
-	char **new_array = NULL;
-	char **ptr_array;
+	char **new_arr = NULL;
+	char **ptr_arr;
 
-	new_array = malloc(sizeof(char **) * new_size);
+	new_arr = malloc(sizeof(char **) * new_s);
 
-	ptr_array = new_array;
-	while (*old_array != NULL)
+	ptr_arr = new_arr;
+	while (*old_arr != NULL)
 	{
-		*ptr_array = _strdup(*old_array);
-		ptr_array++;
-		old_array++;
+		*ptr_arr = _strdup(*old_arr);
+		ptr_arr++;
+		old_arr++;
 	}
-	*ptr_array = NULL;
+	*ptr_arr = NULL;
 
-	return (new_array);
+	return (new_arr);
 }
 
 /**
- * free_arr - frees a 2D array
+ * free_arr - frees a 2D arr
  *
- * @args: pointer to the array to free
+ * @args: pointer to the arr to free
  *
- * Frees the memory allocated for the given 2D array.
+ * Frees the memory allocated for the given 2D arr.
  *
  * Returns: TRUE
  */
