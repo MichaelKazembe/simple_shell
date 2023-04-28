@@ -31,10 +31,11 @@ extern int line_nm;
 extern char *SMshell;
 
 /**
- * struct Alias - list of singly linked
- * @name: alias names
- * @value: command that alias calls
- * @next: points to next node
+ * struct Alias - A node in a singly linked list representing an alias.
+ *
+ * @param name The name of the alias.
+ * @param value The command that the alias represents.
+ * @param next A pointer to the next node in the list.
  */
 
 typedef struct Alias
