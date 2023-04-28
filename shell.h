@@ -77,11 +77,11 @@ int str_comp(char *s1, char *s2, int pref_or_match);
 
 char *get_arr_element(char **arr, char *el_name);
 
-char **make_arr(char *str, char delim, char **if_sep);
+char **make_arr(char *str, char delim, char **ifsep);
 
-int list_length(char **list, char *entry);
+int list_length(char **list, char *intro);
 
-char **arr_cpy(char **old_array, int new_size);
+char **arr_cpy(char **old_arr, int new_s);
 
 int free_arr(char **args);
 
