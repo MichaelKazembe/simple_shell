@@ -1,11 +1,14 @@
 #include "shell.h"
 
 /**
- * get_arr_element - gets an element of an array..
- * @array: array to be searched
- * @element_name: name of element to be found
+ * locate_array_element - retrieves the specified element from an array
  *
- * Return: the array element, or NULL if it is not found
+ * @array: pointer to the array to search
+ * @element_name: pointer to the name of the element to locate
+ *
+ * This function searches the given array for an element with the specified name.
+ *
+ * Return: pointer to the element if found, or NULL if it is not found in the array
  */
 char *get_arr_element(char **array, char *element_name)
 {
@@ -21,13 +24,13 @@ char *get_arr_element(char **array, char *element_name)
 }
 
 /**
- * make_arr - makes a list from a buffer
- * @str: the buffer
- * @delim: character to mark the end of a list entry
- * @if_sep: if the string has semicolons, if_sep becomes the location after the
- * semicolon
+ * make_arr - creates a list from a buffer string
  *
- * Return: a pointer to the list
+ * @str: pointer to the buffer string to parse
+ * @delim: the delimiter character that separates list entries
+ * @if_sep: pointer to update with location after delimiter, or NULL
+ *
+ * Returns pointer to resulting list, or NULL if allocation fails
  */
 char **make_arr(char *str, char delim, char **if_sep)
 {
@@ -80,11 +83,12 @@ char **make_arr(char *str, char delim, char **if_sep)
 }
 
 /**
- * list_length - finds the length of a list, or the index of an entry
- * @list: list to be evaluated
- * @entry: entry to be indexed
+ * list_length - returns length or index of a list entry
  *
- * Return: length or index if success, -1 if failure
+ * @list: pointer to the list to evaluate
+ * @entry: pointer to the entry to index
+ *
+ * Returns length or index of the entry if successful, or -1 if failed
  */
 int list_length(char **list, char *entry)
 {
@@ -116,11 +120,12 @@ int list_length(char **list, char *entry)
 }
 
 /**
- * arr_cpy - copies an array
- * @old_array: array to be copied
+ * arr_cpy - creates a copy of an array
+ *
+ * @old_array: pointer to array to copy
  * @new_size: size of new array
  *
- * Return: the new array
+ * Returns pointer to new array, or NULL if allocation fails
  */
 char **arr_cpy(char **old_array, int new_size)
 {
@@ -142,10 +147,13 @@ char **arr_cpy(char **old_array, int new_size)
 }
 
 /**
- * free_arr - frees a two dimensional array
- * @args: array to be freed
+ * free_arr - frees a 2D array
  *
- * Return: TRUE
+ * @args: pointer to the array to free
+ *
+ * Frees the memory allocated for the given 2D array.
+ *
+ * Returns: TRUE
  */
 int free_arr(char **args)
 {
