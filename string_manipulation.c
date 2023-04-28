@@ -1,10 +1,11 @@
 #include "shell.h"
 
 /**
- *  _strlen - returns length of a string
- * @str: string to be evaluated
+ * _strlen - Computes the length of a given string.
  *
- * Return: the length of the string
+ * @param str The string to be evaluated.
+ *
+ * @return The length of the string.
  */
 int _strlen(char *str)
 {
@@ -23,10 +24,11 @@ int _strlen(char *str)
 }
 
 /**
- * _strdup - allocates a space in memory for a copy of a string
- * @src: string a copy is made of
+ * _strdup - Allocates memory for a new string and copies the contents of the given string into it.
  *
- * Return: a pointer to the copy, or NULL if failure
+ * @param src The string to be duplicated.
+ *
+ * @return A pointer to the newly allocated memory, or NULL if there was a failure.
  */
 char *_strdup(char *src)
 {
@@ -52,11 +54,12 @@ char *_strdup(char *src)
 }
 
 /**
- * str_concat - concatenates two strings
- * @s1: first string
- * @s2: second string
+ * str_concat - Concatenates two strings into a new, dynamically-allocated string.
  *
- * Return: a pointer to the new string, or NULL if failure
+ * @param s1 The first string.
+ * @param s2 The second string.
+ *
+ * @return A pointer to the newly-allocated string, or NULL if there was a failure.
  */
 char *str_concat(char *s1, char *s2)
 {
@@ -90,13 +93,17 @@ char *str_concat(char *s1, char *s2)
 }
 
 /**
- * str_comp - compare two string
- * @s1: string to be compared
- * @s2: string to be compared
- * @pref_or_match: if string needs to be matched exactly or if just a prefix
- * needs to be matched
+ * str_comp - Compares two strings based on a specified match preference.
  *
- * Return: difference between strings
+ * @param s1 The first string to compare.
+ * @param s2 The second string to compare.
+ * @param pref_or_match A flag indicating if the strings should be compared exactly
+ *                      or if only a prefix match is required.
+ *
+ * @return An integer indicating the difference between the two strings.
+ *         A negative value indicates that s1 is less than s2.
+ *         A positive value indicates that s1 is greater than s2.
+ *         A value of 0 indicates that the strings are equal.
  */
 int str_comp(char *s1, char *s2, int pref_or_match)
 {
