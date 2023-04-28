@@ -1,10 +1,13 @@
 #include "shell.h"
 
 /**
- * ito_str - converts an int into a string.
- * @n: int to be converted
+ * ito_str - converts an int to a string
  *
- * Return: the converted number
+ * @n: integer to be converted
+ *
+ * Converts the integer `n` to a string representation.
+ *
+ * Returns: the converted string
  */
 char *ito_str(int n)
 {
@@ -61,10 +64,13 @@ char *ito_str(int n)
 }
 
 /**
- * _atoi - converts a string into a number
+ * _atoi - converts a string to an integer
+ *
  * @s: string to be converted
  *
- * Return: the converted number
+ * Converts the string `s` to an integer.
+ *
+ * Returns: the converted integer
  */
 int _atoi(char *s)
 {
