@@ -14,13 +14,13 @@ int main(__attribute__((unused))int ac, char **av)
 	int line_nm = 1;
 	char *shell_name = NULL;
 
-	int bytes_read;
-	int is_separated = FALSE;
+	int read_btyes;
+	int sep = FALSE;
 	int i;
-	size_t buf_size = 1;
-	char *buf = NULL;
-	char *buf_ptr;
-	char *buf_tmp;
+	size_t bufferfer_s = 1;
+	char *buffer = NULL;
+	char *buffer_ptr;
+	char *buffer_tmp;
 	char **args = NULL;
 
 	shell_name = _strdup(*av);
@@ -29,56 +29,56 @@ int main(__attribute__((unused))int ac, char **av)
 
 	signal(SIGINT, SIG_IGN);
 
-	buf = malloc(1);
-	if (buf == NULL)
+	buffer = malloc(1);
+	if (buffer == NULL)
 		exit(EXIT_FAILURE);
 
 	while (1)
 	{
-		if (is_separated == FALSE)
+		if (sep == FALSE)
 		{
 			if (isatty(STDIN_FILENO) == 1)
 				write(STDOUT_FILENO, "SMshell$ ", 10);
 
-			bytes_read = getline(&buf, &buf_size, stdin);
+			read_btyes = getline(&buffer, &bufferfer_s, stdin);
 
-			if (bytes_read == -1)
+			if (read_btyes == -1)
 				break;
-			if (bytes_read == 1)
+			if (read_btyes == 1)
 			{
 				line_nm++;
 				continue;
 			}
-			buf[bytes_read - 1] = '\0';
-			buf = input_sanitizer(buf, &buf_size);
-			if (buf_size == 0)
+			buffer[read_btyes - 1] = '\0';
+			buffer = input_sanitizer(buffer, &bufferfer_s);
+			if (bufferfer_s == 0)
 			{
 				line_nm++;
 				continue;
 			}
-			buf_ptr = buf;
+			buffer_ptr = buffer;
 		}
 		else
-			buf_ptr = buf_tmp;
+			buffer_ptr = buffer_tmp;
 
-		buf_tmp = NULL;
-		args = make_arr(buf_ptr, ' ', &buf_tmp);
-		if (buf_tmp != NULL)
-			is_separated = TRUE;
+		buffer_tmp = NULL;
+		args = make_arr(buffer_ptr, ' ', &buffer_tmp);
+		if (buffer_tmp != NULL)
+			sep = TRUE;
 		else
-			is_separated = FALSE;
+			sep = FALSE;
 
 		i = cmd_manager(args);
 
 		free(args);
 
-		if (is_separated == FALSE)
+		if (sep == FALSE)
 			line_nm++;
 
 		if (i == EXT_SHELL)
 			break;
 	}
-	free(buf);
+	free(buffer);
 	alias_fun(NULL, TRUE);
 	free_arr(environ);
 	free(shell_name);
