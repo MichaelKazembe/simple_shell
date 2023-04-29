@@ -35,7 +35,7 @@ int main(__attribute__((unused))int ac, char **av)
 
 	while (1)
 	{
-		if (sep == FALSE)
+		if (is_separated == FALSE)
 		{
 			if (isatty(STDIN_FILENO) == 1)
 				write(STDOUT_FILENO, "SMshell$ ", 10);
@@ -64,15 +64,15 @@ int main(__attribute__((unused))int ac, char **av)
 		buf_tmp = NULL;
 		args = make_arr(buf_ptr, ' ', &buf_tmp);
 		if (buf_tmp != NULL)
-			sep = TRUE;
+			is_separated = TRUE;
 		else
-			sep = FALSE;
+			is_separated = FALSE;
 
 		i = cmd_manager(args);
 
 		free(args);
 
-		if (sep == FALSE)
+		if (is_separated == FALSE)
 			line_nm++;
 
 		if (i == EXT_SHELL)
