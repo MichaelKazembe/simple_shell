@@ -109,15 +109,13 @@ int alias_value_print(char *arg, alias *alias_ptr)
 
 	return (FALSE);
 }
-
 /**
-
-*Initializes or resets an alias value.
-*@param alias_ptr Pointer to the alias list.
-*@param arg Name of the alias.
-*@param new_value Value of the alias to set.
-*@return TRUE if the alias is successfully initialized or reset.
-*/
+ *Initializes or resets an alias value.
+ *@param alias_ptr Pointer to the alias list.
+ *@param arg Name of the alias.
+ *@param new_value Value of the alias to set.
+ *@return TRUE if the alias is successfully initialized or reset.
+ */
 int alias_value_set(char *arg, alias *alias_ptr, char *new_value)
 {
 	while (alias_ptr->next != NULL
