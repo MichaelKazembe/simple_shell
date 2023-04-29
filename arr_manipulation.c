@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * locate_array_element - retrieves the specified element from an array
+ * locate_arr_element - retrieves the specified element from an array
  *
  * @array: pointer to the array to search
  * @element_name: pointer to the name of the element to locate
@@ -10,7 +10,7 @@
  *
  * Return: pointer to the element if found, or NULL if it is not found in the array
  */
-char *get_array_element(char **array, char *element_name)
+char *get_arr_element(char **array, char *element_name)
 {
 	while (*array != NULL)
 	{
@@ -24,15 +24,15 @@ char *get_array_element(char **array, char *element_name)
 }
 
 /**
- * make_array - creates a list from a buffer string
+ * make_arr - creates a list from a buffer string
  *
  * @str: pointer to the buffer string to parse
  * @delim: the delimiter character that separates list entries
- * @ifsep: pointer to update with location after delimiter, or NULL
+ * @if_sep: pointer to update with location after delimiter, or NULL
  *
  * Returns pointer to resulting list, or NULL if allocation fails
  */
-char **make_array(char *str, char delim, char **ifsep)
+char **make_arr(char *str, char delim, char **if_sep)
 {
 	char *str_ptr = str;
 	unsigned int i = 2;
@@ -66,7 +66,7 @@ char **make_array(char *str, char delim, char **ifsep)
 			{
 				array[i] = NULL;
 				if (*(str_ptr + 1) != '\0' && *(str_ptr + 2) != '\0')
-					*ifsep = str_ptr + 2;
+					*if_sep = str_ptr + 2;
 				break;
 			}
 			if (*str_ptr != '\0')
@@ -83,18 +83,18 @@ char **make_array(char *str, char delim, char **ifsep)
 }
 
 /**
- * list_length - returns length or index of a list intro
+ * list_length - returns length or index of a list entry
  *
  * @list: pointer to the list to evaluate
- * @intro: pointer to the intro to index
+ * @entry: pointer to the entry to index
  *
- * Returns length or index of the intro if successful, or -1 if failed
+ * Returns length or index of the entry if successful, or -1 if failed
  */
-int list_length(char **list, char *intro)
+int list_length(char **list, char *entry)
 {
 	int i = 0;
 
-	if (intro == NULL)
+	if (entry == NULL)
 	{
 		while (*list != NULL)
 		{
@@ -108,7 +108,7 @@ int list_length(char **list, char *intro)
 	{
 		while (*list != NULL)
 		{
-			if (str_comp(*list, intro, PRFX) == TRUE)
+			if (str_comp(*list, entry, PRFX) == TRUE)
 				return (i);
 
 			i++;
@@ -120,19 +120,19 @@ int list_length(char **list, char *intro)
 }
 
 /**
- * array_cpy - creates a copy of an array
+ * arr_cpy - creates a copy of an array
  *
  * @old_array: pointer to array to copy
- * @new_s: size of new array
+ * @new_size: size of new array
  *
  * Returns pointer to new array, or NULL if allocation fails
  */
-char **array_cpy(char **old_array, int new_s)
+char **arr_cpy(char **old_array, int new_size)
 {
 	char **new_array = NULL;
 	char **ptr_array;
 
-	new_array = malloc(sizeof(char **) * new_s);
+	new_array = malloc(sizeof(char **) * new_size);
 
 	ptr_array = new_array;
 	while (*old_array != NULL)
@@ -147,7 +147,7 @@ char **array_cpy(char **old_array, int new_s)
 }
 
 /**
- * free_array - frees a 2D array
+ * free_arr - frees a 2D array
  *
  * @args: pointer to the array to free
  *
@@ -155,7 +155,7 @@ char **array_cpy(char **old_array, int new_s)
  *
  * Returns: TRUE
  */
-int free_array(char **args)
+int free_arr(char **args)
 {
 	char **ptr = args;
 
