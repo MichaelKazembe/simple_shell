@@ -110,7 +110,6 @@ int input_err_checking(char *ptr)
  */
 void err_msg(char *arg0, char *arg1)
 {
-	int line_nm;
 	char *err_str_num = ito_str(line_nm);
 
 	write(STDERR_FILENO, SMshell, _strlen(SMshell));
